@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    'ptt_scraper.pipelines.PttScraperPipeline': 300,
 }
-DB_PATH = "ptt.db"
+DB_PATH = "data/ptt.db"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

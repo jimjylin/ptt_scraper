@@ -1,5 +1,4 @@
 import scrapy
-import bs4
 
 
 
@@ -19,7 +18,7 @@ class PTTSpider(scrapy.Spider):
             next_page_url = "https://www.ptt.cc/" + response.xpath("//div[@class='btn-group btn-group-paging']/a/@href").getall()[1]
 
             yield scrapy.Request(next_page_url, callback=self.parse)
-
+        
     def scrape_post_from_link(self, post_title_link):
         title = post_title_link.xpath("../../div[@class='title']/a/text()").get()
         author = post_title_link.xpath("../../div[@class='meta']/div[@class='author']/text()").get()
@@ -45,12 +44,9 @@ class PTTSpider(scrapy.Spider):
         
         comments = response.xpath("//div[@class='push']/span[@class='f3 push-content']/text()").getall()
         comments = list(map(lambda x:x[2:], comments))
-        #comments = ('\n').join(comments)
-        if len(comments) > 0:
-            comments = comments[0]
-            item['comments'] = comments
-        else:
-            item['comments'] = ""
+        comments = ('\n').join(comments)
+        item['comments'] = comments
+
         #print(item)
         return item
         
